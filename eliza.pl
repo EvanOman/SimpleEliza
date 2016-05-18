@@ -176,7 +176,7 @@ sub getNameMajor
 		if ($input!~/^([Ee]xit)$/)
 		{
 			# Want to keep trying to get the name
-			if ($input = ~s / ^ ((Hello, ? | Hi, ? ) ? ? ([Mm] y name is | I am | [Cc] all me | I'm))?\b(\w + )\ b / $4 / eg)
+			if ($input = ~s / ^ ((Hello, ? | Hi, ? ) ? ? ([Mm] y name is | I am | [Cc] all me | I am | Im))?\b(\w + )\ b / $4 / eg)
 			{
 				$info {"name"} = $input;
 				printMessage(">Nice to meet you ".$input.", what is your major?\n");
