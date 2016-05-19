@@ -58,6 +58,7 @@ while ($cond)
 			getNameMajor($input);
 		}
 		#Look for question words
+        elsif ($input =~ /\b(Who|What|Where|When|Why|How)\b/i)
 		{
 			handleQuestion($input);
 		}
@@ -77,13 +78,15 @@ while ($cond)
 			printMessage($askQuestionResponse);
 		}
 		#look for emotions
-		elsif ($input =~ /^\b(I|You|HeWha|She)\b \b(\w+)\b (\b(my|me)\b \b(\w+)(\.)?)?/i)
+		elsif ($input =~ /\b(overwhelmed|sad|emotional|angry|furious|hate|frustrated)\b/)
 		{
 			printMessage(">No need to get emotional, we will figure this out!\n");
 		}
 		# The I(blank) case with the question response
-		elsif($input = ~/^\b(I|You|He|She)\b \b(\w+)\b (\b(my|me)\b \b(\w+)(\.)?)?/i)
+		elsif($input =~ /^\b(I|You|He|She)\b \b(\w+)\b (\b(my|me)\b \b(\w+)(\.)?)?/i)
 		{
+			print("The input needs reflecttion, it is $input\n");
+
 			#The start of our responses
 			$starter = "Why do you say ";
 			#Performs the word mapping on our string
@@ -109,7 +112,7 @@ while ($cond)
 sub getInput
 {
 	print "<";
-	my $input = < STDIN > ;
+	my $input = <STDIN>;
 	chomp($input);
 
 	#Add to list of inputs
@@ -138,7 +141,9 @@ sub printMessage
 #Applies the mapping which reflects a statement into a question
 sub applyReflMapping 
 {
+	print("Trying refl mapping\n");
 	my $a = $_[0];
+	print("a is $a\n");
 	$a =~ s/\b(I|my|[Yy]ou|your|me|[Ss]he|[Hh]e|am|are|\.)\b/$replace{$1}/eg;
 	return $a;
 }
@@ -225,11 +230,11 @@ sub handleQuestion
 	if ($totalQuestionResponseCounter % 2 == 0)
 	{
 		my $input = $_[0];
-		$input = ">".applyReflMapping($input).
-		"\n";
-		$middle = "do you think";#
-		Need to clean out the 'do'
-		s
+		$input = ">".applyReflMapping($input)."\n";
+		
+        $middle = "do you think";
+        
+        #Need to clean out the 'do's
 		$input =~ s/\b[Dd]o\b\s//;
 		$input =~ s/\b([Ww]ho|[Ww]hat|[Ww]here|[Ww]hen|[Ww]hy|[Hh]ow much \b(\w+)|[Hh]ow many\b(\w+))\b/$1 $middle/;
 		printMessage($input);
