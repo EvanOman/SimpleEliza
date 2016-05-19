@@ -50,7 +50,7 @@ print ">Hello, I am your academic advisor Eliza. What is your name?\n";
 while ($cond)
 {
 	my $input = getInput();
-	if (($input !~ /^([Ee]xit)$/)
+	if ($input !~ /^([Ee]xit)$/)
 	{
 		#Need to get name / major first
 		if (!@outputArray)
