@@ -85,8 +85,6 @@ while ($cond)
 		# The I(blank) case with the question response
 		elsif($input =~ /^\b(I|You|He|She)\b \b(\w+)\b (\b(my|me)\b \b(\w+)(\.)?)?/i)
 		{
-			print("The input needs reflecttion, it is $input\n");
-
 			#The start of our responses
 			$starter = "Why do you say ";
 			#Performs the word mapping on our string
@@ -141,9 +139,7 @@ sub printMessage
 #Applies the mapping which reflects a statement into a question
 sub applyReflMapping 
 {
-	print("Trying refl mapping\n");
 	my $a = $_[0];
-	print("a is $a\n");
 	$a =~ s/\b(I|my|[Yy]ou|your|me|[Ss]he|[Hh]e|am|are|\.)\b/$replace{$1}/eg;
 	return $a;
 }
