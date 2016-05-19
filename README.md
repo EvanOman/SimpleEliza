@@ -88,5 +88,6 @@ This is a Perl implementation of the simple Eliza chatbot. Below are some logs f
 [eliza]Tell me more.
 [user2]I don't want to
 [eliza]You sound discouraged. Underwater Basket Weaving is hard work but I think you can do it!
+[user2]exit
 [eliza]Good bye, Geoff, I hope you do well in Underwater Basket Weaving.
 ```
